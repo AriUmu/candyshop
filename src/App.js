@@ -1,51 +1,24 @@
 import React from 'react';
-import './App.css';
-import Greetings from "./Greetings";
-import TextField from "./TextField";
+import Header from "../components/Header";
+import Candy from "../components/Candy";
 
-class SimpleForm extends React.Component {
-    state = {
-        firstName: "",
-        firstNameError: "",
-    };
+export default class App extends Component {
+    constructor() {
+        super();
 
-    validateName = name => {
-        const regex = /[A-Za-z]{3,}/;
-        return !regex.test(name)
-            ? "Azaza"
-            : "";
-    };
-
-    onFirstNameBlur = () => {
-        const firstName = this.state.firstName;
-        const firstNameError = this.validateName(firstName);
-        return this.setState({firstNameError});
+        this.state = {
+            title: 'Welcome to CandyShop'
+        };
     }
-
-    onFirstNameChange = event =>
-        this.setState({
-            firstName: event.target.value
-        });
 
     render() {
-        const {firstNameError, firstName} = this.state;
-
-        return (<div>
-            <TextField name="firstName"
-                       label="First name:"
-                       onchange={this.onFirstNameChange}
-                       onblur={this.onFirstNameBlur}
-                       error={firstNameError}
-            />
-            <Greetings firstName={firstName}/>
-        </div>)
+        return (
+            <div>
+                <Header title={this.state.title}/>
+                <div className="mt-5">
+                    <Candy/>
+                </div>
+            </div>
+        )
     }
 }
-
-const App = () => (
-    <div>
-        <SimpleForm/>
-    </div>
-);
-
-export default App;
